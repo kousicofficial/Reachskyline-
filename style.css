@@ -343,22 +343,32 @@ header.scrolled {
     filter: blur(1px);
 }
 
-/* Founder Hero Impact Section */
+/* /* Founder Section - Fix Layout and Visibility */
 .founder-section {
+    position: relative;
     min-height: 90vh;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    position: relative;
-    overflow: hidden;
+    justify-content: center;
+    overflow: visible;
     padding: 100px 0;
-    background: radial-gradient(circle at 50% 40%, rgba(219, 163, 29, 0.15) 0%, transparent 70%);
+    background: transparent;
+}
+
+.founder-section::before {
+    content: "";
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(219, 163, 29, 0.25) 0%, transparent 70%);
+    z-index: 1;
+    top: 30%;
 }
 
 .founder-hero-layout {
     width: 100%;
-    max-width: 1400px;
+    max-width: 1200px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
@@ -370,65 +380,61 @@ header.scrolled {
     width: 100%;
     display: flex;
     justify-content: center;
+    align-items: center;
     position: relative;
-    margin-bottom: 20px;
 }
 
-.founder-hero-img {
-    width: 100%;
-    max-width: none;
+.founder-image img {
+    width: 90%;
+    max-width: 500px;
     height: auto;
+    display: block;
     object-fit: contain;
+    z-index: 2;
     filter: drop-shadow(0 20px 60px rgba(0,0,0,0.6));
-    opacity: 0;
     transform: scale(1.1);
-    transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.active .founder-hero-img {
     opacity: 1;
-    transform: scale(1);
 }
 
-.stats-badges-container {
+.founder-stats {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
-    gap: 30px;
+    gap: 20px;
+    margin-top: 40px;
     width: 100%;
-    margin-top: -60px; /* Slight overlap with image bottom */
     position: relative;
-    z-index: 10;
+    z-index: 3;
 }
 
 .stat-badge {
     background: #FFFFFF !important;
-    padding: 15px 30px;
+    padding: 15px 25px;
     border-radius: 16px;
-    box-shadow: 0 15px 40px rgba(219, 163, 29, 0.3);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
     text-align: center;
-    min-width: 180px;
-    border: none !important;
+    min-width: 160px;
 }
 
 .stat-pct {
     display: block;
     color: var(--primary) !important;
-    font-size: 2rem;
+    font-size: 1.8rem;
     font-weight: 800;
 }
 
 .stat-lbl {
-    color: #444 !important;
-    font-size: 0.8rem;
+    color: #333 !important;
+    font-size: 0.75rem;
     font-weight: 700;
-    text-transform: uppercase;
 }
 
 .founder-content {
-    margin-top: 60px;
+    margin-top: 50px;
     max-width: 800px;
+    position: relative;
+    z-index: 2;
 }
-
 /* Unified Founder Hero Typography - Integrated */
 
 .grid-2 {
@@ -1379,31 +1385,27 @@ header.scrolled {
     .stats-grid { grid-template-columns: repeat(2, 1fr); }
     .hero-content h1 { font-size: 2.2rem; }
     .section-title { font-size: 1.8rem; }
-    /* Founder Hero Mobile Impact */
+    /* Founder Fixed Vertical Flow Mobile */
+    .founder-title { font-size: 2.2rem; }
     .founder-section { min-height: auto; padding: 60px 0; }
-    .founder-hero-img {
-        height: 65vh;
-        object-fit: contain;
-        transform: scale(1.2);
+    .founder-image img {
+        width: 100%;
+        max-width: 350px;
+        transform: scale(1.0);
     }
-    .active .founder-hero-img { transform: scale(1.2); }
-    .founder-title { font-size: 2.8rem; }
-    .stats-badges-container {
+    .founder-stats {
         flex-direction: row;
-        flex-wrap: nowrap;
-        justify-content: center;
+        flex-wrap: wrap;
         gap: 10px;
-        margin-top: 20px;
-        padding: 0 10px;
+        margin-top: 30px;
     }
     .stat-badge {
         flex: 1;
-        min-width: 0;
-        padding: 10px 5px;
-        box-shadow: 0 5px 15px rgba(219, 163, 29, 0.2);
+        min-width: 100px;
+        padding: 10px;
     }
     .stat-pct { font-size: 1.2rem; }
-    .stat-lbl { font-size: 0.5rem; }
+    .stat-lbl { font-size: 0.6rem; }
     
     .client-grid { grid-template-columns: repeat(3, 1fr); gap: 10px; }
 }
