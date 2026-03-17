@@ -280,7 +280,7 @@ header.scrolled {
 .marquee-content {
     display: flex;
     gap: 80px;
-    animation: scroll 30s linear infinite;
+    animation: scroll 15s linear infinite;
     transform: rotateY(-10deg) rotateX(5deg);
 }
 
@@ -1156,6 +1156,16 @@ header.scrolled {
 .reveal-right { transform: translateX(40px); }
 .active { opacity: 1; transform: translate(0, 0) !important; }
 
+/* Mobile Industry Grid Cards */
+.industry-grid {
+    margin-top: 40px;
+}
+.industry-item {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
 /* Mobile Optimization */
 @media (max-width: 992px) {
     .section-padding { padding: 60px 0; }
@@ -1166,8 +1176,9 @@ header.scrolled {
     .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
     
     /* Industry Grid Mobile */
-    .industry-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
-    .industry-item { min-height: 250px; padding: 25px; }
+    .industry-grid { grid-template-columns: repeat(1, 1fr); gap: 20px; }
+    .industry-item { min-height: auto; padding: 30px; }
+    .industry-item i { margin-bottom: 20px; }
     
     /* Growth Pillars Mobile */
     .growth-pillars-grid { flex-wrap: wrap; justify-content: center; gap: 20px; }
@@ -1183,9 +1194,23 @@ header.scrolled {
     .timeline-step { display: block; position: relative; margin-bottom: 40px; }
     .timeline-step:nth-child(even) .step-card, .timeline-step:nth-child(odd) .step-card { grid-column: auto; }
     
-    /* Founder Section Mobile */
-    .founder-title { font-size: 2.8rem; }
-    .founder-image .img-wrapper { min-height: 350px; margin-bottom: 20px; }
+    /* Founder Section Mobile - Matching Screenshot 3 */
+    .founder-section .grid-2 { display: flex; flex-direction: column; }
+    .founder-image { order: 1; margin-bottom: 0; }
+    .founder-content { order: 2; margin-top: 40px; }
+    .founder-title { font-size: 2.5rem; }
+    .founder-image .img-wrapper { 
+        min-height: auto; 
+        margin-bottom: 0; 
+        padding-bottom: 0;
+    }
+    .founder-image img {
+        width: 100%;
+        max-width: 450px;
+        margin: 0 auto;
+        transform: scale(1.0);
+    }
+
     .stat-badge { 
         position: relative !important; 
         top: auto !important; 
@@ -1193,32 +1218,72 @@ header.scrolled {
         left: auto !important; 
         bottom: auto !important; 
         transform: none !important; 
-        margin: 15px auto; 
+        margin: 10px 0; 
         display: flex; 
         width: 100%;
-        max-width: 280px; 
+        max-width: none;
         text-align: center;
-        padding: 15px;
+        padding: 15px 10px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.3);
     }
+
+    /* Container for stat badges on mobile to show them in a row/grid */
+    .founder-image .img-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .founder-image .img-wrapper::after {
+        content: '';
+        display: block;
+        width: 100%;
+        order: 2;
+    }
+
+    /* Group badges together on mobile */
+    .stat-badge {
+        order: 3;
+    }
+
     .badge-1, .badge-2, .badge-3 { animation: none !important; }
     
-    /* Chill section fix for cat image visibility */
-    .chill-section .img-wrapper img {
+    /* Chill section fix to match Modern Problems section */
+    .chill-section .grid-2.alt {
+        display: flex;
+        flex-direction: column;
+    }
+    .chill-section .image { order: 2; }
+    .chill-section .content { order: 1; }
+
+    .chill-section .img-wrapper img,
+    .problem-section .img-wrapper img {
         mask-image: none !important;
         -webkit-mask-image: none !important;
-        mix-blend-mode: normal;
-        filter: brightness(1.1) contrast(1.1);
-        max-width: 100%;
-        height: auto;
+        mix-blend-mode: screen; 
+        filter: brightness(1.3) contrast(1.2);
+        max-width: 90% !important;
+        margin: 0 auto;
     }
-    .chill-section .img-wrapper {
-        margin-bottom: 30px;
+    .chill-section .img-wrapper,
+    .problem-section .img-wrapper {
+        background: transparent;
+        border: none;
+        padding: 0;
+        margin-top: 30px;
     }
 
     /* Marquee Mobile Fix */
     .marquee-content {
-        transform: none !important; /* Remove 3D rotation on mobile for clarity */
-        gap: 40px;
+        transform: none !important;
+        gap: 50px;
+        animation-duration: 10s; /* Slightly faster on mobile */
+    }
+    .marquee-content img {
+        height: 45px;
+        width: auto;
+        max-width: 120px;
+        filter: brightness(1.2) contrast(1.1);
     }
     
     /* Stats Circular Dashboard Mobile */
