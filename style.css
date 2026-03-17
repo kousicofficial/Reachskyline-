@@ -1158,12 +1158,39 @@ header.scrolled {
     .footer-grid { grid-template-columns: 1fr; gap: 2.5rem; }
     .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
     
+    /* Industry Grid Mobile */
+    .industry-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    .industry-item { min-height: 280px; padding: 25px; }
+    
+    /* Growth Pillars Mobile */
+    .growth-pillars-grid { flex-wrap: wrap; justify-content: center; gap: 20px; }
+    .pillar-item { flex: none; width: calc(50% - 15px); }
+    
+    /* Triple Feature Mobile */
+    .feature-points-grid { grid-template-columns: 1fr; gap: 30px; }
+    
+    /* Roadmap Mobile */
     .timeline-line { left: 20px; }
     .step-marker { left: 20px; transform: none; }
-    .step-card { width: calc(100% - 60px) !important; margin-left: 60px !important; text-align: left; }
-    .timeline-step { justify-content: flex-start !important; }
+    .step-card { width: calc(100% - 60px) !important; margin-left: 60px !important; text-align: left !important; padding: 15px 0; }
+    .timeline-step { display: block; position: relative; margin-bottom: 40px; }
+    .timeline-step:nth-child(even) .step-card, .timeline-step:nth-child(odd) .step-card { grid-column: auto; }
     
-    .stat-badge { position: relative; display: inline-block; top: auto; right: auto; left: auto; bottom: auto; margin: 10px; }
+    /* Founder Section Mobile */
+    .founder-title { font-size: 2.8rem; }
+    .founder-image .img-wrapper { min-height: 400px; margin-bottom: 40px; }
+    .stat-badge { position: relative !important; top: auto !important; right: auto !important; left: auto !important; bottom: auto !important; transform: none !important; margin: 10px auto; display: flex; max-width: 250px; text-align: left; }
+    .badge-1, .badge-2, .badge-3 { animation: none !important; }
+    
+    /* Stats Circular Dashboard Mobile */
+    .stats-grid { justify-content: center; flex-wrap: wrap; }
+    .stat-item { width: 140px; height: 140px; }
+    .stat-item h3 { font-size: 1.8rem; }
+    .stat-item p { font-size: 0.75rem; }
+
+    /* CTA Mobile */
+    .cta-card h2 { font-size: 3rem; }
+    .benefits-grid { grid-template-columns: 1fr; }
     
     .nav-links {
         display: none;
@@ -1172,6 +1199,8 @@ header.scrolled {
         top: 100%; left: 0; width: 100%;
         background: #000;
         padding: 40px;
+        z-index: 1000;
+        border-bottom: 1px solid var(--glass-border);
     }
     
     .nav-links.show { display: flex; }
@@ -1179,7 +1208,13 @@ header.scrolled {
 }
 
 @media (max-width: 600px) {
-    .stats-grid { grid-template-columns: 1fr; }
+    .industry-grid { grid-template-columns: 1fr; }
+    .pillar-item { width: 100%; aspect-ratio: auto; border-radius: 20px; padding: 40px; }
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
     .hero-content h1 { font-size: 2.2rem; }
     .section-title { font-size: 1.8rem; }
+    .founder-title { font-size: 2.22rem; }
+    .cta-card h2 { font-size: 2.2rem; }
+    .marquee-content img { height: 40px; }
+    .marquee-content { gap: 40px; }
 }

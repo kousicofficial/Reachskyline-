@@ -98,48 +98,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-    // 7. Global Floating Emoji System (Optimized & Refined)
-    const emojiContainer = document.getElementById('emoji-container');
-    const emojis = ['📈', '🚀', '🎯', '📊', '📣', '💰', '🤖', '📧'];
-    const emojiCount = 8; // Reduced count
 
-    for (let i = 0; i < emojiCount; i++) {
-        const span = document.createElement('span');
-        span.className = 'floating-emoji';
-        span.innerText = emojis[i % emojis.length];
-        
-        // Strategic Random Position
-        const top = (i * (window.innerHeight / 2)) + Math.random() * 200;
-        const left = 5 + Math.random() * 85;
-        
-        span.style.top = `${top}px`;
-        span.style.left = `${left}%`;
-        
-        const size = 2 + Math.random() * 2;
-        span.style.fontSize = `${size}rem`;
-        
-        if (emojiContainer) emojiContainer.appendChild(span);
-        
-        // Continuous Floating Motion via CSS (High performance)
-        const duration = 15 + Math.random() * 10;
-        const delay = i * -2;
-        span.style.animation = `floatComplex ${duration}s infinite ease-in-out ${delay}s`;
-    }
 
     // 8. Performance Optimized Parallax (using requestAnimationFrame)
     let ticking = false;
     window.addEventListener('mousemove', (e) => {
+        if (window.innerWidth < 992) return; // Disable on mobile/tablet
         if (!ticking) {
             window.requestAnimationFrame(() => {
                 const xFactor = (e.clientX / window.innerWidth - 0.5) * 25;
                 const yFactor = (e.clientY / window.innerHeight - 0.5) * 25;
                 
-                const emojiElements = document.querySelectorAll('.floating-emoji');
-                emojiElements.forEach((el, i) => {
-                    const speed = (i % 3 + 1) * 0.2;
-                    el.style.transform = `translate(${xFactor * speed}px, ${yFactor * speed}px)`;
-                });
-
                 // Subtle parallax for About Logo
                 const aboutLogo = document.querySelector('.about-logo img');
                 if (aboutLogo) {
