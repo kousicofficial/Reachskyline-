@@ -476,7 +476,7 @@ header.scrolled {
 
 .industry-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 30px;
     margin-top: 60px;
 }
@@ -531,7 +531,14 @@ header.scrolled {
     mask-image: radial-gradient(circle at center, black 40%, transparent 80%);
     -webkit-mask-image: radial-gradient(circle at center, black 40%, transparent 80%);
     filter: drop-shadow(0 0 30px rgba(219, 163, 29, 0.3));
-    transition: 1s ease;
+    transition: 1.5s ease;
+}
+
+/* Specific fix for cat image on larger screens to ensure visibility */
+.chill-section .img-wrapper img {
+    max-height: 500px;
+    width: auto;
+    margin: 0 auto;
 }
 
 .chill-section:hover .img-wrapper img {
@@ -1160,7 +1167,7 @@ header.scrolled {
     
     /* Industry Grid Mobile */
     .industry-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
-    .industry-item { min-height: 280px; padding: 25px; }
+    .industry-item { min-height: 250px; padding: 25px; }
     
     /* Growth Pillars Mobile */
     .growth-pillars-grid { flex-wrap: wrap; justify-content: center; gap: 20px; }
@@ -1178,9 +1185,41 @@ header.scrolled {
     
     /* Founder Section Mobile */
     .founder-title { font-size: 2.8rem; }
-    .founder-image .img-wrapper { min-height: 400px; margin-bottom: 40px; }
-    .stat-badge { position: relative !important; top: auto !important; right: auto !important; left: auto !important; bottom: auto !important; transform: none !important; margin: 10px auto; display: flex; max-width: 250px; text-align: left; }
+    .founder-image .img-wrapper { min-height: 350px; margin-bottom: 20px; }
+    .stat-badge { 
+        position: relative !important; 
+        top: auto !important; 
+        right: auto !important; 
+        left: auto !important; 
+        bottom: auto !important; 
+        transform: none !important; 
+        margin: 15px auto; 
+        display: flex; 
+        width: 100%;
+        max-width: 280px; 
+        text-align: center;
+        padding: 15px;
+    }
     .badge-1, .badge-2, .badge-3 { animation: none !important; }
+    
+    /* Chill section fix for cat image visibility */
+    .chill-section .img-wrapper img {
+        mask-image: none !important;
+        -webkit-mask-image: none !important;
+        mix-blend-mode: normal;
+        filter: brightness(1.1) contrast(1.1);
+        max-width: 100%;
+        height: auto;
+    }
+    .chill-section .img-wrapper {
+        margin-bottom: 30px;
+    }
+
+    /* Marquee Mobile Fix */
+    .marquee-content {
+        transform: none !important; /* Remove 3D rotation on mobile for clarity */
+        gap: 40px;
+    }
     
     /* Stats Circular Dashboard Mobile */
     .stats-grid { justify-content: center; flex-wrap: wrap; }
@@ -1215,6 +1254,6 @@ header.scrolled {
     .section-title { font-size: 1.8rem; }
     .founder-title { font-size: 2.22rem; }
     .cta-card h2 { font-size: 2.2rem; }
-    .marquee-content img { height: 40px; }
-    .marquee-content { gap: 40px; }
+    .marquee-content img { height: 35px; max-width: 120px; object-fit: contain; }
+    .marquee-content { gap: 30px; }
 }
