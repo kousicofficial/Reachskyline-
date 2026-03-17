@@ -280,56 +280,85 @@ header.scrolled {
     background: radial-gradient(circle at 50% 50%, rgba(219, 163, 29, 0.05) 0%, transparent 70%);
 }
 
-.marquee {
-    overflow: hidden;
-    padding: 60px 0;
-    position: relative;
-    /* Edge fading mask */
-    mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
-    -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+.client-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    padding: 40px 0;
 }
 
-.marquee-content {
+.client-item {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 40px 30px;
     display: flex;
-    gap: 100px;
-    animation: scrollFast 15s linear infinite;
     align-items: center;
-    width: max-content;
-    will-change: transform;
-}
-
-.marquee-content img {
-    height: 65px;
-    width: auto;
-    filter: none; /* Restore original colors */
-    opacity: 1;
+    justify-content: center;
     transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    overflow: hidden;
     cursor: pointer;
 }
 
-.marquee-content img:hover {
+.client-item img {
+    height: 60px;
+    width: auto;
+    object-fit: contain;
+    filter: grayscale(1);
+    opacity: 0.7;
+    transition: 0.5s;
+    z-index: 2;
+}
+
+.client-glow {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, rgba(219, 163, 29, 0.2), transparent 70%);
+    opacity: 0;
+    transition: 0.5s;
+    z-index: 1;
+}
+
+.client-item:hover {
+    transform: scale(1.1) translateY(-10px) rotateX(10deg);
+    border-color: var(--primary);
+    background: rgba(255, 255, 255, 0.05);
+    z-index: 10;
+}
+
+.client-item:hover img {
+    filter: grayscale(0);
     opacity: 1;
-    transform: scale(1.2) translateY(-5px);
-    filter: brightness(1) invert(0) drop-shadow(0 0 20px rgba(219, 163, 29, 0.4));
+    transform: scale(1.1);
 }
 
-.marquee:hover .marquee-content {
-    animation-play-state: paused;
+.client-item:hover .client-glow {
+    opacity: 1;
 }
 
-@keyframes scrollFast {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
+/* Spotlight Effect */
+.client-grid:hover .client-item:not(:hover) {
+    opacity: 0.4;
+    filter: blur(1px);
 }
 
-/* Founder & Grid Sections */
+.founder-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    background: radial-gradient(circle at 100% 50%, rgba(219, 163, 29, 0.08) 0%, transparent 70%);
+}
+
 .founder-section .img-wrapper {
     position: relative;
-    border-radius: 20px;
+    border-radius: 30px;
     overflow: visible;
     background: transparent;
     height: 100%;
-    min-height: 550px;
+    min-height: 650px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -383,6 +412,18 @@ header.scrolled {
     display: flex;
     justify-content: center;
     align-items: center;
+    background: radial-gradient(circle at center, rgba(219, 163, 29, 0.1) 0%, transparent 60%);
+}
+
+.stats-badges-container {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.stats-badges-container .stat-badge {
+    pointer-events: auto;
 }
 
 .stat-badge {
@@ -441,11 +482,13 @@ header.scrolled {
     50% { transform: translateY(-15px); }
 }
 
-.badge-3 { animation: floatBadgeX 4s infinite ease-in-out; }
+.founder-zoom-entry {
+    animation: zoomIn 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
 
-@keyframes floatBadgeX {
-    0%, 100% { transform: translate(-50%, 0); }
-    50% { transform: translate(-50%, -15px); }
+@keyframes zoomIn {
+    0% { transform: scale(0.9); opacity: 0; }
+    100% { transform: scale(1.1); opacity: 1; }
 }
 
 .img-wrapper.glassmorphism {
@@ -1320,22 +1363,13 @@ header.scrolled {
         margin-top: 30px;
     }
 
-    /* Marquee Mobile Fix */
-    .marquee {
-        mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-        -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    /* Client Grid Mobile */
+    .client-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
     }
-    .marquee-content {
-        transform: none !important;
-        gap: 60px;
-        animation: scrollFast 12s linear infinite !important; /* Force animation on mobile */
-        width: max-content;
-    }
-    .marquee-content img {
-        height: 50px;
-        filter: none !important; /* Ensure original color on mobile */
-        opacity: 1;
-    }
+    .client-item { padding: 25px 15px; }
+    .client-item img { height: 40px; filter: grayscale(0); opacity: 1; }
     
     /* Stats Circular Dashboard Mobile */
     .stats-grid { justify-content: center; flex-wrap: wrap; }
@@ -1368,8 +1402,43 @@ header.scrolled {
     .stats-grid { grid-template-columns: repeat(2, 1fr); }
     .hero-content h1 { font-size: 2.2rem; }
     .section-title { font-size: 1.8rem; }
-    .founder-title { font-size: 2.22rem; }
-    .cta-card h2 { font-size: 2.2rem; }
-    .marquee-content { gap: 40px; animation: scrollFast 8s linear infinite !important; }
-    .marquee-content img { height: 40px; }
+    .founder-title { font-size: 2rem; }
+    .founder-section { min-height: auto; }
+    .founder-image .img-wrapper { 
+        width: 100vw; 
+        height: 75vh; 
+        min-height: auto;
+        margin-left: calc(-1 * var(--container-width) / 2); /* Break out of container */
+        left: 50%;
+        transform: translateX(-50%);
+        border-radius: 0;
+        margin-bottom: 20px;
+    }
+    .founder-image img { 
+        height: 100%; 
+        width: 100%; 
+        object-fit: cover; 
+        border-radius: 0;
+    }
+    .stats-badges-container {
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 10px;
+        width: 100%;
+        padding: 0 15px;
+        order: 3;
+    }
+    .stat-badge { 
+        position: static !important; 
+        flex: 1; 
+        min-width: 0; 
+        padding: 10px 5px;
+        margin: 0;
+    }
+    .stat-pct { font-size: 1.1rem; }
+    .stat-lbl { font-size: 0.6rem; }
+    
+    .client-grid { grid-template-columns: repeat(3, 1fr); gap: 10px; }
 }
