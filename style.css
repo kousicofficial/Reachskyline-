@@ -281,15 +281,15 @@ header.scrolled {
 .marquee-content {
     display: flex;
     gap: 100px;
-    animation: scrollFast 12s linear infinite;
+    animation: scrollFast 15s linear infinite;
     align-items: center;
 }
 
 .marquee-content img {
     height: 65px;
     width: auto;
-    filter: brightness(0) invert(1); /* Make them white/silver for premium look */
-    opacity: 0.6;
+    filter: none; /* Restore original colors */
+    opacity: 1;
     transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     cursor: pointer;
 }
@@ -1286,12 +1286,12 @@ header.scrolled {
     .marquee-content {
         transform: none !important;
         gap: 60px;
-        animation-duration: 8s; /* Very fast on mobile as requested */
+        animation: scrollFast 10s linear infinite !important; /* Force animation on mobile */
     }
     .marquee-content img {
         height: 50px;
-        filter: brightness(0) invert(1);
-        opacity: 0.8;
+        filter: none !important; /* Ensure original color on mobile */
+        opacity: 1;
     }
     
     /* Stats Circular Dashboard Mobile */
@@ -1326,6 +1326,6 @@ header.scrolled {
     .section-title { font-size: 1.8rem; }
     .founder-title { font-size: 2.22rem; }
     .cta-card h2 { font-size: 2.2rem; }
-    .marquee-content { gap: 40px; animation-duration: 6s; }
+    .marquee-content { gap: 40px; animation: scrollFast 8s linear infinite !important; }
     .marquee-content img { height: 40px; }
 }
